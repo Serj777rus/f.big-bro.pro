@@ -203,9 +203,113 @@
     </div>
     <div class="chek_launch">
         <div class="chek_launch_main">
-            <p>Стоимость открытия</p>
+            <p>Сколько стоит открыть BIG BRO:</p>
             <div class="chech">
-                
+                <h2>Мужская парикмахерская<br>"BIG BRO"</h2>
+                <span>ЧЕК НА ОТКРЫТИЕ</span>
+                <div class="disclaimer">
+                     <img src="../assets/stars.svg">
+                    <h6>*Цены на открытие указаны исходя из статистики средней стоимости открытия барбершопов "BIG BRO" в 2023 и 2024 годах</h6>
+                    <img src="../assets/stars.svg">
+                </div>
+                <div class="check_values">
+                    <div class="check_value"><p>Затраты на ремонт</p><span>400 000р</span></div>
+                    <div class="check_value"><p>Мебель и оборудование</p><span>1 100 000р</span></div>
+                    <div class="check_value"><p>Паушальный взнос</p><span>500 000р</span></div>
+                    <div class="check_value"><p>Стартовый маркетинг</p><span>200 000р</span></div>
+                    <div class="check_value"><p>Резервный взнос</p><span>600 000р</span></div>
+                </div>
+                <div class="disclaimer">
+                    <img src="../assets/lines.svg">
+                    <div class="vlaue_div"><h2>ИТОГО:</h2><span>2 800 000р</span></div>
+                    <div class="vlaue_div"><h3>Окупаемость:</h3><span>18 месяцев</span></div>
+                    <img src="../assets/lines.svg">
+                </div>
+                <Button><slot>Купить франшизу</slot></Button>
+            </div>
+        </div>
+    </div>
+    <div class="what_else">
+        <div class="what_else_main">
+            <p>Что еще?</p>
+            <span>Покупая франшизу - вы приобретаете не только имя</span>
+            <div class="what_else_cards">
+                <div class="what_else_card">
+                    <div class="what_else_card_text">
+                        <h3>Онлайн<br>Академия</h3>
+                        <h4>Доступ к обучающим материалам для барберов, администраторов и управляющих из любой точки 24/7</h4>
+                    </div>
+                    <img src="../assets/education.png">
+                </div>
+                <div class="what_else_card">
+                    <div class="what_else_card_text">
+                        <h3>Сильное<br>коммьюнити</h3>
+                        <h4>Доступ к общему чату партнеров, которые придут на помощь в любое время дня и ночи, что бы помочь Вам</h4>
+                    </div>
+                    <img src="../assets/comunity.png">
+                </div>
+                <div class="what_else_card">
+                    <div class="what_else_card_text">
+                        <h3>Аналитическая<br>система</h3>
+                        <h4>Дашборды собственной разработки, которые помогут Вам максимально глубоко проанализировать вашу деятельность</h4>
+                    </div>
+                    <img src="../assets/dashboard.png">
+                </div>
+                <div class="what_else_card">
+                    <div class="what_else_card_text">
+                        <h3>Мастермайнды<br>и слеты</h3>
+                        <h4>Участие в мастермайндах и слетах партнеров для обмена накопленным опытом и знаниями</h4>
+                    </div>
+                    <img src="../assets/mm.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="come_to_bb">
+        <div class="come_to_bb_main">
+            <p>Уже есть барбершоп?</p>
+            <div class="come_to_bb_card">
+                <div class="left_sode_card">
+                    <h3>Присоединяйся к BIG BRO<br>на выгодных условиях</h3>
+                    <h4>Для тех кто готов встать под крыло сильного бренда и пробить потолок - мы предлагаем льготные условия для присоединения к нашему братсву</h4>
+                </div>
+                <div class="right_side_card">
+                    <div class="card_uslovie">
+                        <p>Паушальный взнос</p>
+                        <span>400 000р</span>
+                    </div>
+                    <div class="card_uslovie">
+                        <p>Ребрендинг</p>
+                        <span>в течении 1 года</span>
+                    </div>
+                    <div class="card_uslovie">
+                        <p>Фиксированный роялти</p>
+                        <span>15 000р/месяц</span>
+                    </div>
+                    <Button><slot>Вступить в братство</slot></Button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer_main">
+            <p>Остались вопросы?</p>
+            <span>Напиши директору сети BIG BRO или оставь контакты и мы свяжемся</span>
+            <div class="footer_content">
+                <div class="footer_right_side">
+                <img src="../assets/general.png">
+                    <div class="socials">
+                        <p>Горбачев Сергей</p>
+                        <div class="socials_link">
+                            <a href="https://t.me/S_V_Gorbachev"><img src="../assets/tg.png"></a>
+                            <a href="https://wa.me/79114682801"><img src="../assets/wa.png"></a>
+                            <a href="https://t.me/S_V_Gorbachev"><img src="../assets/vk.png"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer_left_side">
+                    
+                </div>
             </div>
         </div>
     </div>
@@ -1372,6 +1476,359 @@
     }
     .partner_card p {
         font-size: 20px;
+    }
+}
+.chek_launch {
+    width: 100%;
+    padding: 40px 0px;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, rgba(51,51,51, 1), rgba(223, 183, 0, 1)61%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chek_launch_main {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+.chek_launch_main p {
+    font-size: 64px;
+    font-weight: 900;
+    color: #fff;
+    text-align: center;
+}
+.chech {
+    width: 500px;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 64px 24px;
+    background: url(../assets/Vector1.svg);
+    filter: drop-shadow(0px 8px 20px 0 rgba(0,0,0, .25));
+    -webkit-filter: drop-shadow(0px 8px 20px 0 rgba(0,0,0, .25));
+    background-repeat: no-repeat;
+    background-position: center;
+    box-sizing: border-box;
+    gap: 24px;
+}
+.chech h2 {
+    font-size: 24px;
+    font-weight: 900;
+    text-align: center;
+    line-height: 100%;
+}
+.chech span {
+    font-size: 32px;
+    font-weight: 100;
+    text-align: center;
+    line-height: 100%;
+    color: #333;
+}
+.disclaimer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #333;
+}
+.disclaimer p {
+    font-size: 32px;
+    color: #333;
+    font-weight: 100;
+    line-height: 100%;
+}
+.disclaimer h6 {
+    font-size: 12px;
+    font-weight: 100;
+    line-height: 100%;
+}
+.check_values {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #333;
+}
+.check_value {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.check_value p {
+    font-size: 24px;
+    font-weight: 100;
+    line-height: 100%;
+    color: #333;
+}
+.check_value span {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 100%;
+}
+.vlaue_div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.vlaue_div span {
+    font-size: 32px;
+    font-weight: 900;
+}
+@media all and (max-width: 440px) {
+    .chek_launch {
+        padding: 40px 10px;
+    }
+    .chek_launch_main {
+        width: 100%;
+    }
+    .chek_launch_main p {
+        font-size: 32px;
+    }
+    .chech {
+        width: 100%;
+        height: auto;
+        background-size: 100% 100%;
+        gap: 16px
+    }
+    .chech h2 {
+        font-size: 24px;
+    }
+    .disclaimer p {
+        font-size: 24px;
+    }
+    .disclaimer h6 {
+        font-size: 10px;
+    }
+    .check_value p {
+        font-size: 16px;
+    }
+    .check_value span {
+        font-size: 20px;
+    }
+    .vlaue_div span {
+        font-size: 24px;
+    }
+}
+.what_else {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 40px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.what_else_main {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+}
+.what_else_main p {
+    font-size: 64px;
+
+    font-weight: 900;
+    text-align: center;
+}
+.what_else_main span {
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+}
+.what_else_cards {
+    margin-top: 40px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+.what_else_card {
+    width: calc(100% / 2 - 16px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 32px;
+    gap: 8px;
+}
+.what_else_card_text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.what_else_card_text h3 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 100%;
+    color: #fff;
+}
+.what_else_card_text h4 {
+    font-size: 16px;
+    font-weight: 100;
+    line-height: 100%;
+    color: #fff;
+}
+.what_else_card img {
+    height: 200px;
+    object-fit: contain;
+}
+.what_else_card:nth-child(1) {
+    background: linear-gradient(-60deg, rgba(56, 64, 73, 1), rgba(223, 183, 0, 1));
+}
+.what_else_card:nth-child(2) {
+    background: linear-gradient(60deg, rgba(187, 253, 45, 1), rgba(34, 41, 195, 1));
+}
+.what_else_card:nth-child(3) {
+    background: linear-gradient(60deg, rgba(195, 116, 34, 1), rgba(253, 221, 45, 1));
+}
+.what_else_card:nth-child(4) {
+    background: linear-gradient(60deg, rgba(62, 27, 29, 1), rgba(208, 27, 3, 1));
+}
+@media all and (max-width: 440px) {
+    .what_else {
+        padding: 40px 10px;
+    }
+    .what_else_main {
+        width: 100%;
+    }
+    .what_else_main p {
+        font-size: 32px;
+    }
+    .what_else_main span {
+        font-size: 16px;
+    }
+    .what_else_cards {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .what_else_card {
+        width: 100%;
+    }
+    .what_else_card img {
+        max-height: 160px;
+        max-width: calc(100% / 2 - 8px);
+    }
+    .what_else_card_text {
+        max-width: calc(100% / 2 - 8px);
+    }
+    .what_else_card_text h3 {
+        font-size: 24px;
+    }
+}
+.come_to_bb {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 40px 0px;
+    background: #333;
+    color: #fff;
+}
+.come_to_bb_main {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.come_to_bb_main p {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 100%;
+    text-align: center;
+}
+.come_to_bb_card {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 32px;
+    background: linear-gradient(45deg, rgba(223, 183, 0, 1), rgba(126, 106, 11, 1));
+    padding: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 32px;
+}
+.left_sode_card {
+    display: flex;
+    width: calc(50% - 16px);
+    flex-direction: column;
+    gap: 32px;
+}
+.left_sode_card h3 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 100%;
+}
+.left_sode_card h4 {
+    font-size: 24px;
+    font-weight: 200;
+    line-height: 100%;
+}
+.right_side_card {
+    width: calc(50% - 16px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+}
+.card_uslovie {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: start;
+}
+.card_uslovie p {
+    font-size: 32px;
+    font-weight: 200;
+    line-height: 100%;
+}
+.card_uslovie span {
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 100%;
+}
+@media all and (max-width: 440px) {
+    .come_to_bb {
+        padding: 40px 10px;
+    }
+    .come_to_bb_main {
+        width: 100%;
+    }
+    .come_to_bb_main p {
+        font-size: 32px;
+    }
+    .come_to_bb_card {
+        flex-direction: column;
+        gap: 32px;
+        border-radius: 24px;
+        padding: 20px;
+    }
+    .left_sode_card {
+        width: 100%;
+        gap: 8px;
+    }
+    .left_sode_card h3 {
+        font-size: 20px;
+    }
+    .left_sode_card h4 {
+        font-size: 16px;
+    }
+    .right_side_card {
+        width: 100%;
+    }
+    .card_uslovie p {
+        font-size: 20px;
+    }
+    .card_uslovie span {
+        font-size: 28px;
     }
 }
 </style>
