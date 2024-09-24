@@ -135,6 +135,80 @@
             </div>
         </div>
     </div>
+    <div class="why_we">
+        <div class="why_we_main">
+            <h4>Почему мы?</h4>
+            <div class="why_we_cards">
+                <div class="why_we_card">
+                    <h3>Сильное коммьнити</h3>
+                    <p>Более 70 человек в общем чате наших партнеров, готовых прийти на помощь в любое время</p>
+                <img src="../assets/phone.png">
+                </div>
+                <div class="why_we_card">
+                    <h3>Надежные подрядчики</h3>
+                    <p>На любой ваш запрос - у нас есть собственный сотрудник или надежный подрядчик</p>
+                    <img src="../assets/head.png">
+                </div>
+                <div class="why_we_card">
+                    <h3>Обучения и еще обучения</h3>
+                    <p>Обучающие материалы, онлайн конференции, очные мастермайнды для партнеров и мастеров</p>
+                    <img src="../assets/books.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="steps_launch">
+        <div class="steps_launch_main">
+            <h3>Этапы открытия</h3>
+            <p>На каждом этапе Вас будет сопровождать опытный менеджер отдела “Запуска”</p>
+            <div class="steps">
+                <div class="step" v-for="step in steps" :key="step.id">
+                    <h3>{{ step.title }}</h3>
+                    <p>{{ step.description }}</p>
+                    <img :src="step.image">
+                    <div class="number_step">{{ step.id }}</div>
+                </div>
+            </div>
+            <Button><slot>Получить план открытия</slot></Button>
+        </div>
+    </div>
+    <div class="photos">
+        <div class="photos_main">
+            <p>Как будет выглядеть ваш BIG BRO</p>
+            <div class="photo_div">
+                <img src="../assets/vhod.jpg">
+                <img src="../assets/inside.jpg">
+                <img src="../assets/inside2.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="partners">
+        <div class="partners_main">
+            <p>BIG BRO в цифрах</p>
+            <div class="partners_div">
+                <div class="partner_card" v-for="partner in partners" :key="partner.id">
+                    <div class="avatar_data">
+                        <img :src="partner.avatar">
+                        <div class="datas">
+                            <p>{{ partner.name }}</p>
+                            <h6>г. {{ partner.city }}</h6>
+                            <h6>количество точек: <span>{{ partner.shops }}</span></h6>
+                            <h6>Средняя выручка: <span>{{ partner.money }}</span></h6>
+                        </div>
+                    </div>
+                    <img :src="partner.image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="chek_launch">
+        <div class="chek_launch_main">
+            <p>Стоимость открытия</p>
+            <div class="chech">
+                
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -179,7 +253,74 @@
                     chairs: '',
                     valueBrutto: '',
                     valueNetto: ''
-                }
+                },
+                steps: [
+                    {
+                        id: 1,
+                        title: 'База знаний',
+                        description: 'Откроем доступ к онлайн энциклопедии в которой пошагово расписан план открытия и ведения бизнеса',
+                        image: require('../assets/baza.png')
+                    },
+                    {
+                        id: 2,
+                        title: 'Помещение',
+                        description: 'Расскажем, подскажем, поможем, проанализируем и проверим найденное помещение',
+                        image: require('../assets/place.png')
+                    },
+                    {
+                        id: 3,
+                        title: 'Ремонт',
+                        description: 'Разработаем дизайн проект, поможем с наймом строительной бригады, дадим рекомендации и материалы для ремонта',
+                        image: require('../assets/remont.png')
+                    },
+                    {
+                        id: 4,
+                        title: 'Персонал',
+                        description: 'Подскажем где искать, как проводить собеседования, проведем тестирование и оценку навыков',
+                        image: require('../assets/personal.png')
+                    },
+                    {
+                        id: 5,
+                        title: 'Маркетинг',
+                        description: 'Еще на этапе ремонта запустим подготовим соцсети, настроим рекламу и начнем привлечение клиентов',
+                        image: require('../assets/marketing.png')
+                    },
+                    {
+                        id: 6,
+                        title: 'Открытие',
+                        description: 'Поможем с организацией технического и официального открытия с розыгрышами и призами',
+                        image: require('../assets/remont.png')
+                    }
+                ],
+                partners: [
+                    {
+                        id: 1,
+                        name: 'Сергей Самойлов',
+                        city: 'Комсомольск-на-Амуре',
+                        shops: '2',
+                        money: '2 546 000',
+                        image: require('../assets/image16.png'),
+                        avatar: require('../assets/sam.png')
+                    },
+                    {
+                        id: 2,
+                        name: 'Андрей Бураков',
+                        city: 'Ижевск',
+                        shops: '3',
+                        money: '3 927 000',
+                        image: require('../assets/image16.png'),
+                        avatar: require('../assets/bur.png')
+                    },
+                    {
+                        id: 3,
+                        name: 'Алексей Цыпринюк',
+                        city: 'Волгоград',
+                        shops: '3',
+                        money: '4 239 000',
+                        image: require('../assets/image16.png'),
+                        avatar: require('../assets/cip.png')
+                    }
+                ]
             }
         },
         watch: {
@@ -895,5 +1036,342 @@
 .form_big_calc form input::placeholder {
     color: #fff;
 }
+}
+.why_we {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    padding: 40px 0px;
+    justify-content: center;
+    align-items: center;
+}
+.why_we_main {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+}
+.why_we_main h4 {
+    font-size: 64px;
+    font-weight: 900;
+    color: #333;
+    text-align: start;
+}
+.why_we_cards {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+.why_we_card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 18px;
+    box-sizing: border-box;
+    width: calc(100% / 3 - 12px);
+    height: 660px;
+    box-sizing: border-box;
+    padding: 24px;
+    border-radius: 32px;
+    color: #fff;
+}
+.why_we_card h3 {
+    font-size: 42px;
+    font-weight: 700;
+}
+.why_we_card p {
+    font-size: 20px;
+    font-weight: 400;
+}
+.why_we_card:nth-child(1) {
+    background: linear-gradient(-45deg, rgba(255, 212, 101, 1), rgba(184, 144, 39, 1));
+}
+.why_we_card:nth-child(1) img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 50%;
+}
+.why_we_card:nth-child(2) {
+    background: linear-gradient(-45deg, rgba(180, 255, 105, 1), rgba(108, 153, 103, 1));
+}
+.why_we_card:nth-child(2) img {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    height: 50%;
+}
+.why_we_card:nth-child(3) {
+    background: linear-gradient(-45deg, rgba(0, 133, 255, 1), rgba(0, 80, 153, 1));
+}
+.why_we_card:nth-child(3) img {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    height: 50%;
+    transform: translate(-50%);
+}
+@media all and (max-width: 440px) {
+    .why_we {
+        padding: 40px 10px;
+        box-sizing: border-box;
+    }
+    .why_we_main {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .why_we_main h4 {
+        font-size: 32px;
+        text-align: center;
+    }
+    .why_we_cards {
+        flex-direction: column;
+        box-sizing: border-box;
+        gap: 12px;
+    }
+    .why_we_card {
+        width: 100%;
+        height: 500px;
+        box-sizing: border-box;
+    }
+    .why_we_card:nth-child(1) img {
+        height: 50%;
+    }
+    .why_we_card:nth-child(2) img {
+        height: 50%;
+    }
+    .why_we_card:nth-child(3) img {
+        height: 50%;
+    }
+}
+.steps_launch {
+    width: 100%;
+    padding: 40px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #333;
+    box-sizing: border-box;
+}
+.steps_launch_main {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+}
+.steps_launch_main h3 {
+    font-size: 64px;
+    text-align: center;
+    font-weight: 900;
+    color: #fff;
+}
+.steps_launch_main p {
+    font-size: 24px;
+    text-align: center;
+    font-weight: 500;
+    color: #fff;
+}
+.steps {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 120px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+.step {
+    width: 320px;
+    height: 340px;
+    border: 1px solid #A8A8A8;
+    border-radius: 20px;
+    box-sizing: border-box;
+    position: relative;
+    padding: 12px 12px 0px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.step h3 {
+    font-size: 32px;
+    font-weight: 500;
+    color: #fff;
+}
+.step p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #fff;
+}
+.step img {
+    height: 160px;
+    object-fit: contain;
+}
+.number_step {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background: #DFB700;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media all and (max-width: 440px) {
+    .steps_launch {
+        padding: 40px 10px;
+    }
+    .steps_launch_main {
+        width: 100%;
+    }
+    .steps_launch_main h3 {
+        font-size: 32px;
+    }
+    .steps_launch_main p {
+        font-size: 16px;
+    }
+    .steps {
+    margin-top: 32px;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    align-items: center;
+}
+}
+.photos {
+    width: 100%;
+    padding: 40px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.photos_main {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.photos_main p {
+    font-size: 64px;
+    font-weight: 900;
+    color: #333;
+    text-align: center;
+}
+.photo_div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.photo_div img {
+    width: calc(100% / 3 - 16px);
+    object-fit: contain;
+}
+@media all and (max-width: 440px) {
+    .photos {
+        padding: 40px 10px;
+    }
+    .photos_main {
+        width: 100%;
+    }
+    .photos_main p {
+        font-size: 32px;
+    }
+    .photo_div {
+        justify-content: start;
+        gap: 12px;
+        scroll-snap-type: x mandatory;
+        overflow-x: scroll;
+    }
+    .photo_div img {
+        width: 90%;
+        scroll-snap-align: start;
+    }
+}
+.partners {
+    width: 100%;
+    padding: 40px 0px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #333;
+    color: #fff;
+}
+.partners_main {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.partners_main p {
+    font-size: 64px;
+    font-weight: 900;
+    text-align: center;
+}
+.partners_div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.partner_card {
+    box-sizing: border-box;
+    width: 350px;
+    height: 270px;
+    border: 1px solid #A8A8A8;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.avatar_data {
+    width: 100%;
+    display: flex;
+    padding: 16px 16px 0px 16px;
+    flex-direction: row;
+    gap: 12px;
+}
+.datas {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.datas p {
+    font-size: 18px;
+    font-weight: 900;
+}
+.datas h6 {
+    font-size: 12px;
+    font-weight: 500;
+}
+.datas span {
+    font-weight: 900;
+    color: #DFB700;
+}
+@media all and (max-width: 440px) {
+    .partners {
+        padding: 40px 10px;
+    }
+    .partners_main {
+        width: 100%;
+    }
+    .partners_main p {
+        font-size: 32px;
+    }
+    .partners_div {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+    }
+    .partner_card p {
+        font-size: 20px;
+    }
 }
 </style>
