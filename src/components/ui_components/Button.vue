@@ -20,6 +20,7 @@
         align-self: center;
         justify-self: center;
         line-height: 100%;
+        cursor: pointer;
     }
     @media all and (max-width: 440px) {
         button {

@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <Button><slot>Узнать подробнее</slot></Button>
+            <Button @click="openPop"><slot>Узнать подробнее</slot></Button>
         </div>
     </div>
     <div class="cifr_div">
@@ -74,7 +74,7 @@
             </div>
             <div class="big_btn">
                 <p>Получить<br>финансовую модель</p>
-                <Button><slot>Получить фин модель</slot></Button>
+                <Button @click="openPop"><slot>Получить фин модель</slot></Button>
             </div>
         </div>
     </div>
@@ -126,9 +126,9 @@
                             <Button form="calc_form"><slot>Получить план</slot></Button>
                         </div>
                         <form id="calc_form" @submit.prevent="sendForm">
-                            <input type="text" name="name" placeholder="Имя">
-                            <input type="text" name="phone" placeholder="Телефон">
-                            <input type="text" name="city" placeholder="Город">
+                            <input v-model="form.name" type="text" name="name" placeholder="Имя">
+                            <input v-model="form.phone" type="text" name="phone" placeholder="Телефон">
+                            <input v-model="form.city" type="text" name="city" placeholder="Город">
                         </form>
                     </div>
                 </div>
@@ -169,7 +169,7 @@
                     <div class="number_step">{{ step.id }}</div>
                 </div>
             </div>
-            <Button><slot>Получить план открытия</slot></Button>
+            <Button @click="openPop"><slot>Получить план открытия</slot></Button>
         </div>
     </div>
     <div class="photos">
@@ -225,7 +225,7 @@
                     <div class="vlaue_div"><h3>Окупаемость:</h3><span>18 месяцев</span></div>
                     <img src="../assets/lines.svg">
                 </div>
-                <Button><slot>Купить франшизу</slot></Button>
+                <Button @click="openPop"><slot>Купить франшизу</slot></Button>
             </div>
         </div>
     </div>
@@ -286,7 +286,7 @@
                         <p>Фиксированный роялти</p>
                         <span>15 000р/месяц</span>
                     </div>
-                    <Button><slot>Вступить в братство</slot></Button>
+                    <Button @click="openPop"><slot>Вступить в братство</slot></Button>
                 </div>
             </div>
         </div>
@@ -297,7 +297,7 @@
             <span>Напиши директору сети BIG BRO или оставь контакты и мы свяжемся</span>
             <div class="footer_content">
                 <div class="footer_right_side">
-                <img src="../assets/general.png">
+                    <img src="../assets/general.png">
                     <div class="socials">
                         <p>Горбачев Сергей</p>
                         <div class="socials_link">
@@ -308,18 +308,30 @@
                     </div>
                 </div>
                 <div class="footer_left_side">
-                    
+                    <form @submit.prevent="sendForm">
+                        <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
+                        <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
+                        <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
+                        <Button><slot>Отправить</slot></Button>
+                    </form>
                 </div>
+            </div>
+            <div class="logo_polici">
+                <img src="../assets/Лого-Big-Bro-Черный_Белый.png">
+                <a href="https://drive.google.com/file/d/1J6YS_PAZNyLBtfDBQTrulKC0iuC6eL9q/view" target="_blank"><p>Политика конфиденциальности</p></a>
             </div>
         </div>
     </div>
+    <PopUp :isOpen="isShowPop" @closePop="closePopUp"></PopUp>
 </template>
 
 <script>
     import Button from './ui_components/Button.vue';
+    import PopUp from './ui_components/PopUp.vue';
     export default {
         components: {
-            Button
+            Button,
+            PopUp
         },
         data() {
             return {
@@ -424,7 +436,8 @@
                         image: require('../assets/image16.png'),
                         avatar: require('../assets/cip.png')
                     }
-                ]
+                ],
+                isShowPop: false
             }
         },
         watch: {
@@ -462,6 +475,12 @@
                 for (let i = 0; i < value; i++) {
                     arrClass[i].classList.add('activecalc')
                 }
+            },
+            closePopUp() {
+                this.isShowPop = false
+            },
+            openPop() {
+                this.isShowPop = true
             }
         },
         mounted() {
@@ -1829,6 +1848,154 @@
     }
     .card_uslovie span {
         font-size: 28px;
+    }
+}
+.footer {
+    width: 100%;
+    padding: 40px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.footer_main {
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px
+}
+.footer_main p {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 100%;
+    text-align: center;
+}
+.footer_main span {
+    font-size: 32px;
+    text-align: center;
+    font-weight: 100;
+}
+.footer_content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 32px;
+}
+.footer_right_side {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    box-sizing: border-box;
+    border-radius: 24px;
+    box-shadow: 0px 4px 20px 4px rgba(0, 0, 0, .25);
+    padding: 24px;
+}
+.footer_right_side img {
+    width: 96px;
+    object-fit: contain;
+}
+.socials {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.socials p {
+    font-size: 24px;
+    text-align: start;
+}
+.socials_link {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+.socials_link img {
+    width: 64px;
+    object-fit: contain;
+}
+.footer_left_side {
+    width: calc(50% - 16px);
+    display: flex;
+    box-sizing: border-box;
+}
+.footer_left_side form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 24px;
+    border-radius: 24px;
+    border: 1px solid #c2c2c2;
+    background: #333;
+    box-shadow: 0px 4px 20px 4px rgba(0, 0, 0, .25);
+}
+.footer_left_side form input {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    border-bottom: 1px solid #DFB700 !important;
+    background: transparent;
+    color: #fff;
+}
+.footer_left_side input::placeholder {
+    color: #fff;
+}
+.logo_polici {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo_polici img {
+    width: 200px;
+    object-fit: contain;
+}
+.logo_polici p {
+    font-size: 16px;
+    font-weight: 300;
+    cursor: pointer;
+}
+@media all and (max-width: 440px) {
+    .footer {
+        padding: 40px 10px;
+    }
+    .footer_main {
+        width: 100%;
+    }
+    .footer_main p {
+        font-size: 32px;
+    }
+    .footer_main span {
+        font-size: 16px;
+    }
+    .footer_content {
+        flex-direction: column;
+    }
+    .footer_right_side {
+        width: 100%;
+    }
+    .footer_right_side img {
+        width: 64px;
+    }
+    .socials p {
+        font-size: 24px;
+    }
+    .socials_link img {
+        width: 32px;
+    }
+    .footer_left_side {
+        width: 100%;
+    }
+    .logo_polici img {
+        width: 120px;
+    }
+    .logo_polici p {
+        font-size: 12px;
     }
 }
 </style>
