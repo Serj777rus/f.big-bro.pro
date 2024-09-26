@@ -46,7 +46,7 @@
                     <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
                     <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
                     <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
-                    <Button><slot>Проверить</slot></Button>
+                    <Button type="submit" :disabled="!form.name || !form.phone || !form.city"><slot>Проверить</slot></Button>
                 </form>
             </div>
         </div>
@@ -123,7 +123,7 @@
                     <div class="form_big_calc">
                         <div class="form_text_btn">
                             <p>Оставь заявку и получи бизнес план для своего города</p>
-                            <Button form="calc_form"><slot>Получить план</slot></Button>
+                            <Button :disabled="!form.name || !form.phone || !form.city" type="submit" form="calc_form"><slot>Получить план</slot></Button>
                         </div>
                         <form id="calc_form" @submit.prevent="sendForm">
                             <input v-model="form.name" type="text" name="name" placeholder="Имя">
@@ -312,7 +312,7 @@
                         <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
                         <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
                         <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
-                        <Button><slot>Отправить</slot></Button>
+                        <Button :disabled="!form.name || !form.phone || !form.city" type="submit"><slot>Отправить</slot></Button>
                     </form>
                 </div>
             </div>
@@ -326,6 +326,7 @@
 </template>
 
 <script>
+    import axios from 'axios';
     import Button from './ui_components/Button.vue';
     import PopUp from './ui_components/PopUp.vue';
     export default {
@@ -481,6 +482,16 @@
             },
             openPop() {
                 this.isShowPop = true
+            },
+            async sendForm() {
+                try {
+                    const response = await axios.post('http://localhost:3000/postform', this.form);
+                    if (response.status == 200) {
+                        console.log('Данные ушли')
+                    }
+                } catch(error) {
+                    console.log(error);
+                }
             }
         },
         mounted() {
@@ -672,6 +683,27 @@
     color: #fff;
     text-align: center;
 }
+@media all and (max-width: 360px) {
+    .main_div h1 {
+    font-size: 32px;
+    color: #fff;
+    line-height: 120%;
+    font-weight: 900;
+    text-align: center;
+}
+.main_div span {
+    font-size: 48px;
+}
+.main_div h3 {
+    font-size: 48px;
+    color: #DFB700;
+    transform: rotate(-5deg);
+    line-height: 100%;
+}
+.main_div {
+    gap: 16px;
+}
+}
 }
 .cifr_div {
     width: 100%;
@@ -822,6 +854,8 @@
     padding: 12px 32px;
     border-radius: 32px;
     background: #DFB700;
+    color: #fff;
+    font-size: 16px;
 }
 .calc {
     width: calc(100%/3 - 16px);
@@ -905,6 +939,19 @@
     .picture, .calc, .big_btn {
         width: 100%;
     }
+    .picture p {
+        font-size: 12px;
+    }
+}
+@media all and (max-width: 370px) {
+    .calc_value span {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 100%;
+}
+.picture p {
+    font-size: 10px;
+}
 }
 .calc_big {
     width: 100%;
@@ -1160,6 +1207,16 @@
     color: #fff;
 }
 }
+@media all and (max-width:370px) {
+    .big_calc_value_viruchka span {
+    font-size: 40px;
+    color: #DFB700;
+    font-weight: 900;
+    }
+    .click_tab img {
+        width: 40px;
+    }
+}
 .why_we {
     width: 100%;
     display: flex;
@@ -1268,6 +1325,45 @@
         height: 50%;
     }
 }
+@media all and (max-width: 370px) {
+    .why_we {
+        padding: 40px 10px;
+        box-sizing: border-box;
+    }
+    .why_we_main {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .why_we_main h4 {
+        font-size: 32px;
+        text-align: center;
+    }
+    .why_we_cards {
+        flex-direction: column;
+        box-sizing: border-box;
+        gap: 12px;
+    }
+    .why_we_card {
+        width: 100%;
+        height: 500px;
+        box-sizing: border-box;
+    }
+    .why_we_card:nth-child(1) img {
+        height: 50%;
+    }
+    .why_we_card:nth-child(2) img {
+        height: 50%;
+    }
+    .why_we_card:nth-child(3) img {
+        height: 50%;
+    }
+    .why_we_card h3 {
+        font-size: 32px;
+    }
+    .why_we_card p {
+        font-size: 16px;
+    }
+}
 .steps_launch {
     width: 100%;
     padding: 40px 0px;
@@ -1364,6 +1460,30 @@
     width: 100%;
     align-items: center;
 }
+}
+@media all and (max-width: 370px) {
+    .steps_launch {
+        padding: 40px 10px;
+    }
+    .steps_launch_main {
+        width: 100%;
+    }
+    .steps_launch_main h3 {
+        font-size: 32px;
+    }
+    .steps_launch_main p {
+        font-size: 16px;
+    }
+    .steps {
+    margin-top: 32px;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    align-items: center;
+    }
+    .step {
+        width: calc(100% - 32px);
+    }
 }
 .photos {
     width: 100%;
@@ -1495,6 +1615,32 @@
     }
     .partner_card p {
         font-size: 20px;
+    }
+}
+@media all and (max-width: 370px) {
+    .partners {
+        padding: 40px 10px;
+    }
+    .partners_main {
+        width: 100%;
+    }
+    .partners_main p {
+        font-size: 32px;
+    }
+    .partners_div {
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+        box-sizing: border-box;
+    }
+    .partner_card p {
+        font-size: 20px;
+    }
+    .partner_card {
+        width: 100%;
+    }
+    .datas p {
+        text-align: start;
     }
 }
 .chek_launch {
@@ -1634,6 +1780,44 @@
     }
     .vlaue_div span {
         font-size: 24px;
+    }
+}
+@media all and (max-width: 370px) {
+    .chek_launch {
+        padding: 40px 10px;
+    }
+    .chek_launch_main {
+        width: 100%;
+    }
+    .chek_launch_main p {
+        font-size: 32px;
+    }
+    .chech {
+        width: 100%;
+        height: auto;
+        background-size: 100% 100%;
+        gap: 16px
+    }
+    .chech h2 {
+        font-size: 20px;
+    }
+    .chech span {
+        font-size: 20px;
+    }
+    .disclaimer p {
+        font-size: 20px;
+    }
+    .disclaimer h6 {
+        font-size: 10px;
+    }
+    .check_value p {
+        font-size: 12px;
+    }
+    .check_value span {
+        font-size: 16px;
+    }
+    .vlaue_div span {
+        font-size: 20px;
     }
 }
 .what_else {

@@ -2,9 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
-const axios = require('axios');
+// const axios = require('axios');
 
-const Port = 3000;
+const PORT = 3000;
 const app = express();
 const server = http.createServer(app);
 
@@ -15,9 +15,15 @@ app.use(cors({
     origin: '*'
 }))
 
+app.post('/postform', async(req, res) => {
+    const {name, phone, city} = req.body;
+    console.log(name, phone, city);
+    if (name || phone || city) {
+        res.status(200).send('Заебись')
+    }
+})
 
 
-
-server.listen(Port, () => {
-    console.log(`Сервер заущен на порту ${Port}`)
+server.listen(PORT, () => {
+    console.log(`Сервер заущен на порту ${PORT}`)
 })

@@ -7,7 +7,7 @@
                 <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
                 <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
                 <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
-                <Button><slot>Отправить</slot></Button>
+                <Button :disabled="!form.name || !form.phone || !form.city" type="submit"><slot>Отправить</slot></Button>
             </form>
             <p @click="this.$emit('closePop')">&#10006;</p>
         </div>
