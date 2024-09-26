@@ -17,7 +17,7 @@
         background: #DFB700;
         font-size: 18px;
         color: #fff;
-        align-self: center;
+        /* align-self: center; */
         justify-self: center;
         line-height: 100%;
         cursor: pointer;

@@ -46,6 +46,7 @@
                     <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
                     <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
                     <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
+                    <div v-show="message !== ''">{{ message }}</div>
                     <Button type="submit" :disabled="!form.name || !form.phone || !form.city"><slot>Проверить</slot></Button>
                 </form>
             </div>
@@ -123,6 +124,7 @@
                     <div class="form_big_calc">
                         <div class="form_text_btn">
                             <p>Оставь заявку и получи бизнес план для своего города</p>
+                            <div v-show="message !== ''">{{ message }}</div>
                             <Button :disabled="!form.name || !form.phone || !form.city" type="submit" form="calc_form"><slot>Получить план</slot></Button>
                         </div>
                         <form id="calc_form" @submit.prevent="sendForm">
@@ -175,10 +177,11 @@
     <div class="photos">
         <div class="photos_main">
             <p>Как будет выглядеть ваш BIG BRO</p>
-            <div class="photo_div">
-                <img src="../assets/vhod.jpg">
-                <img src="../assets/inside.jpg">
-                <img src="../assets/inside2.jpg">
+            <div class="another_photo">
+                <img class="big_photo" v-for="photo in photos" :key="photo.id" :src="photo.image" :class="{activeimage: activephoto == photo.id}">
+                <div class="all_photos">
+                    <img class="thumb_photo" v-for="photo in photos" :key="photo.id" :src="photo.image" @click="changePhoto(photo.id)">
+                </div>
             </div>
         </div>
     </div>
@@ -226,6 +229,20 @@
                     <img src="../assets/lines.svg">
                 </div>
                 <Button @click="openPop"><slot>Купить франшизу</slot></Button>
+            </div>
+        </div>
+    </div>
+    <div class="gift">
+        <div class="gift_main">
+            <div class="left_side_gift">
+                <h3>Дарим подарки!</h3>
+                <p>При покупке франшизы дарим в подарок стартовый набор косметики на</p>
+                <span>50 000р</span>
+                <Button @click="openPop"><slot>Хочу подарок</slot></Button>
+            </div>
+            <div class="right_side_gift">
+                <img src="../assets/cosmetics.jpg">
+                <img src="../assets/cosmetics2.jpg">
             </div>
         </div>
     </div>
@@ -312,6 +329,7 @@
                         <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
                         <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
                         <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
+                        <div v-show="message !== ''">{{ message }}</div>
                         <Button :disabled="!form.name || !form.phone || !form.city" type="submit"><slot>Отправить</slot></Button>
                     </form>
                 </div>
@@ -322,17 +340,20 @@
             </div>
         </div>
     </div>
-    <PopUp :isOpen="isShowPop" @closePop="closePopUp"></PopUp>
+    <PopUp @sendPopForm="fetchingPopUpData" :isOpen="isShowPop" @closePop="closePopUp"></PopUp>
+    <PopUpTwo :isOpenTime="isShowPopTime" @closePopTime="closePopTime" @sendPopForm="fetchingPopUpData"></PopUpTwo>
 </template>
 
 <script>
     import axios from 'axios';
     import Button from './ui_components/Button.vue';
     import PopUp from './ui_components/PopUp.vue';
+    import PopUpTwo from './ui_components/PopUpTwo.vue';
     export default {
         components: {
             Button,
-            PopUp
+            PopUp,
+            PopUpTwo
         },
         data() {
             return {
@@ -438,7 +459,24 @@
                         avatar: require('../assets/cip.png')
                     }
                 ],
-                isShowPop: false
+                isShowPop: false,
+                message: '',
+                photos: [
+                    {
+                        id: 1,
+                        image: require('../assets/vhod.jpg')
+                    },
+                    {
+                        id: 2,
+                        image: require('../assets/inside.jpg')
+                    },
+                    {
+                        id: 3,
+                        image: require('../assets/inside2.jpg')
+                    }
+                ],
+                activephoto: 2,
+                isShowPopTime: false
             }
         },
         watch: {
@@ -483,15 +521,34 @@
             openPop() {
                 this.isShowPop = true
             },
+            closePopTime() {
+                this.isShowPopTime = false
+            },
             async sendForm() {
                 try {
                     const response = await axios.post('http://localhost:3000/postform', this.form);
+                    this.form.name = '';
+                    this.form.phone = '';
+                    this.form.city = '';
+                    this.message = 'Терпения BRO, отправляем'
                     if (response.status == 200) {
-                        console.log('Данные ушли')
+                        console.log('Данные ушли');
+                        this.message = 'BRO, твои данные отправлены';
+                        setTimeout(() => {
+                            this.message = ''
+                        }, 1500)
                     }
                 } catch(error) {
                     console.log(error);
                 }
+            },
+            changePhoto (id) {
+                this.activephoto = id
+            },
+            fetchingPopUpData(data) {
+                this.form = data;
+                console.log(this.form)
+                this.sendForm();
             }
         },
         mounted() {
@@ -499,6 +556,9 @@
             this.bigCalc.cut = 1000
             this.bigCalc.rent = 700
             this.bigCalc.chairs = 1
+            setTimeout(() => {
+                this.isShowPopTime = true;
+            }, 5000)
         }
     }
 </script>
@@ -525,6 +585,7 @@
     display: flex;
     width: 1200px;
     flex-direction: column;
+    align-items: center;
     gap: 96px;
 }
 .header {
@@ -1377,6 +1438,7 @@
     width: 1200px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .steps_launch_main h3 {
     font-size: 64px;
@@ -1514,6 +1576,118 @@
 .photo_div img {
     width: calc(100% / 3 - 16px);
     object-fit: contain;
+}
+.another_photo {
+    width: 100%;
+    position: relative;
+    height: 700px;
+}
+.big_photo {
+    width: 100%;
+    max-height: 700px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px 2px rgba(0, 0, 0, .25);
+    opacity: 0;
+    transition: all 300ms ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.big_photo.activeimage {
+    /* display: block; */
+    opacity: 1;
+}
+.all_photos {
+    width: 320px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(-20%, -20%);
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, .3);
+    backdrop-filter: blur(2px);
+    box-sizing: border-box;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 16px;
+}
+.thumb_photo {
+    display: block;
+    width: 120px;
+    object-fit: contain;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 300ms ease;
+    scroll-snap-align: start;
+}
+.thumb_photo:hover {
+    transform: scale(1.1);
+}
+@media all and (max-width: 440px) {
+    .another_photo {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16;
+}
+.big_photo {
+    width: 100%;
+    height: auto !important;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px 2px rgba(0, 0, 0, .25);
+    opacity: 0;
+    transition: all 300ms ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.big_photo.activeimage {
+    /* display: block; */
+    opacity: 1;
+}
+.all_photos {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    transform: translate(0, -50%);
+    box-sizing: border-box;
+    padding: 0;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .3);
+    backdrop-filter: blur(2px);
+    box-sizing: border-box;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 16px;
+    align-self: center;
+}
+.thumb_photo {
+    display: block;
+    width: 140px;
+    object-fit: contain;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 300ms ease;
+    scroll-snap-align: start;
+}
+.thumb_photo:hover {
+    transform: scale(1.1);
+}
 }
 @media all and (max-width: 440px) {
     .photos {
@@ -1820,6 +1994,148 @@
         font-size: 20px;
     }
 }
+.gift {
+    width: 100%;
+    background: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0px;
+    box-sizing: border-box;
+}
+.gift_main {
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: center; */
+    gap: 32px;
+}
+.left_side_gift {
+    width: calc(50% - 16px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 16px;
+    z-index: 1;
+}
+.left_side_gift h3 {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 100%;
+    color: #DFB700;
+}
+.left_side_gift p {
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 100%;
+    color: #fff;
+}
+.left_side_gift span {
+    font-size: 96px;
+    font-weight: 900;
+    line-height: 100%;
+    color: red;
+}
+.right_side_gift {
+    width: calc(50% -16px);
+    height: 580px;
+    position: relative;
+}
+.right_side_gift img {
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 24px;
+    box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, .25);
+    position: absolute;
+}
+.right_side_gift img:nth-child(1) {
+    transform: rotate(12deg);
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+.right_side_gift img:nth-child(2) {
+    transform: rotate(-12deg);
+    top: 0;
+    right: 300px;
+    z-index: 0;
+}
+@media all and (max-width: 440px) {
+    .gift {
+    width: 100%;
+    background: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 10px;
+    box-sizing: border-box;
+}
+.gift_main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-items: center; */
+    gap: 32px;
+}
+.left_side_gift {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    z-index: 1;
+}
+.left_side_gift h3 {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 100%;
+    color: #DFB700;
+    text-align: center;
+}
+.left_side_gift p {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 100%;
+    color: #fff;
+    text-align: center;
+}
+.left_side_gift span {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 100%;
+    color: red;
+    text-align: center;
+}
+.right_side_gift {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+.right_side_gift img {
+    max-height: auto;
+    width: 50%;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0px 0px 8px 1px rgba(255, 255, 255, .25);
+    position: relative
+}
+.right_side_gift img:nth-child(1) {
+    transform: rotate(-12deg);
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+.right_side_gift img:nth-child(2) {
+    transform: rotate(12deg);
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+}
 .what_else {
     width: 100%;
     box-sizing: border-box;
@@ -1980,6 +2296,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: start;
     gap: 16px;
 }
 .card_uslovie {
