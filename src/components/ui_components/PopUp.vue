@@ -2,7 +2,7 @@
     <div class="popup" v-if="isOpen">
         <div class="popup_main">
             <form @submit.prevent="sendForm">
-                <img src="@/assets/Лого-Big-Bro-Черный_Белый.png">
+                <img src="@/assets/logo-big-bro-black-white.png">
                 <h5>Оставьте Ваши контакты и мы свяжемся с Вами в ближайшее время</h5>
                 <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
                 <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
