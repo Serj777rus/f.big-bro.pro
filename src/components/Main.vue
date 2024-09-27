@@ -460,7 +460,7 @@
                     }
                 ],
                 isShowPop: false,
-                message: 'Привет',
+                message: '',
                 photos: [
                     {
                         id: 1,
