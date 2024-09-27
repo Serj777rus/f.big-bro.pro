@@ -21,6 +21,9 @@ app.use(cors({
 }))
 
 const token = process.env.AUTHORIZATION_CODE;
+app.get('/oauth', (req, res) => {
+    res.send('Сервер работает!');
+});
 
 app.post('/postform', async(req, res) => {
     const {name, phone, city} = req.body;
