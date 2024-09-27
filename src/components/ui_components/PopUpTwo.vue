@@ -8,7 +8,7 @@
                 <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
                 <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
                 <div v-show="message !== ''" style="align-self: center; line-height: 100%; font-size: 24px; color: #DFB700;">{{ message }}</div>
-                <Button :disabled="!form.name || !form.phone || !form.city" type="submit"><slot>Отправить</slot></Button>
+                <Button :disabled="!form.name || !form.phone || !form.city" type="submit" @click="trackGoal"><slot>Отправить</slot></Button>
             </form>
             <p @click="this.$emit('closePopTime')">&#10006;</p>
         </div>
@@ -39,6 +39,15 @@
         methods: {
             sendForm() {
                 this.$emit('sendPopForm', this.form)
+            },
+            trackGoal() {
+                if (window.ym) {
+                    // Идентификатор счетчика (замените на ваш)
+                    window.ym(98455671, 'reachGoal', 'form_sent');
+                    console.log('Цель отправлена в Яндекс Метрику');
+                } else {
+                    console.warn('Яндекс Метрика не подключена');
+                }
             }
         }
     }

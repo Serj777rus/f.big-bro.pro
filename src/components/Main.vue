@@ -47,7 +47,7 @@
                     <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
                     <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
                     <div v-show="message !== ''" style="align-self: center; line-height: 100%; font-size: 24px; color: #DFB700;">{{ message }}</div>
-                    <Button type="submit" :disabled="!form.name || !form.phone || !form.city"><slot>Проверить</slot></Button>
+                    <Button type="submit" :disabled="!form.name || !form.phone || !form.city" @click="trackGoal"><slot>Проверить</slot></Button>
                 </form>
             </div>
         </div>
@@ -125,7 +125,7 @@
                         <div class="form_text_btn">
                             <p>Оставь заявку и получи бизнес план для своего города</p>
                             <div v-show="message !== ''" style="align-self: center; line-height: 100%; font-size: 24px; color: #DFB700;">{{ message }}</div>
-                            <Button :disabled="!form.name || !form.phone || !form.city" type="submit" form="calc_form"><slot>Получить план</slot></Button>
+                            <Button :disabled="!form.name || !form.phone || !form.city" type="submit" form="calc_form" @click="trackGoal"><slot>Получить план</slot></Button>
                         </div>
                         <form id="calc_form" @submit.prevent="sendForm">
                             <input v-model="form.name" type="text" name="name" placeholder="Имя">
@@ -330,7 +330,7 @@
                         <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
                         <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
                         <div v-show="message !== ''" style="align-self: center; line-height: 100%; font-size: 24px; color: #DFB700;">{{ message }}</div>
-                        <Button :disabled="!form.name || !form.phone || !form.city" type="submit"><slot>Отправить</slot></Button>
+                        <Button :disabled="!form.name || !form.phone || !form.city" type="submit" @click="trackGoal"><slot>Отправить</slot></Button>
                     </form>
                 </div>
             </div>
@@ -551,6 +551,15 @@
                 this.form = data;
                 console.log(this.form)
                 this.sendForm();
+            },
+            trackGoal() {
+                if (window.ym) {
+                    // Идентификатор счетчика (замените на ваш)
+                    window.ym(98455671, 'reachGoal', 'form_sent');
+                    console.log('Цель отправлена в Яндекс Метрику');
+                } else {
+                    console.warn('Яндекс Метрика не подключена');
+                }
             }
         },
         mounted() {
