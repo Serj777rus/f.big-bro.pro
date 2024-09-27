@@ -20,13 +20,13 @@ app.use(cors({
     origin: '*'
 }))
 
-app.get('/oauth', (req, res) => {
-    const authCode = req.query.code;
-    fs.appendFileSync('.env', `AUTHORIZATION_CODE=${authCode}`, (err) => {
-        if (err) throw err;
-    });
-    res.send('Код сохранен')
-})
+// app.get('/oauth', (req, res) => {
+//     const authCode = req.query.code;
+//     fs.appendFileSync('.env', `AUTHORIZATION_CODE=${authCode}`, (err) => {
+//         if (err) throw err;
+//     });
+//     res.send('Код сохранен')
+// })
 
 // const pipeline = '5559297';
 

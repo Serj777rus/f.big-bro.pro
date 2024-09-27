@@ -4,7 +4,7 @@
         <video src="../assets/video.mp4" autoplay muted loop></video>
         <div class="hero_main_div">
             <div class="header">
-                <img src="../assets/Лого-Big-Bro-Черный_Белый.png">
+                <img src="../assets/logo-big-bro-black-white.png">
             </div>
             <div class="main_div">
                 <h1>ФРАНШИЗА БАРБЕРШОПОВ <br><span>"BIG BRO"</span></h1>
@@ -335,7 +335,7 @@
                 </div>
             </div>
             <div class="logo_polici">
-                <img src="../assets/Лого-Big-Bro-Черный_Белый.png">
+                <img src="../assets/logo-big-bro-black-white.png">
                 <a href="https://drive.google.com/file/d/1J6YS_PAZNyLBtfDBQTrulKC0iuC6eL9q/view" target="_blank"><p>Политика конфиденциальности</p></a>
             </div>
         </div>
