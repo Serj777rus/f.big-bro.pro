@@ -20,16 +20,6 @@ app.use(cors({
     origin: '*'
 }))
 
-// app.get('/oauth', (req, res) => {
-//     const authCode = req.query.code;
-//     fs.appendFileSync('.env', `AUTHORIZATION_CODE=${authCode}`, (err) => {
-//         if (err) throw err;
-//     });
-//     res.send('Код сохранен')
-// })
-
-// const pipeline = '5559297';
-
 app.post('/postform', async(req, res) => {
     const {name, phone, city} = req.body;
     console.log(name, phone, city);
@@ -37,14 +27,26 @@ app.post('/postform', async(req, res) => {
         const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads', {headers: {'Authorization': `Bearer ${process.env.AUTHORIZATION_CODE}`}},
             {
                 "name": "Новая сделка BIG BRO",
+                "pipeline_id": 5559297,
                 "custom_fields_value": [
                     {
-                        "fields_name": ""
-                    }
+                        "fields_id": 574960,
+                        "value": city
+                    },
+                    {
+                        "fields_id": 577272,
+                        "value": name
+                    },
+                    {
+                        "fields_id": 581932,
+                        "value": phone
+                    },
                 ]
             }
         )
-        res.status(200).send('Заебись')
+        if (response.status == 200) {
+            res.status(200).send('Заебись')
+        }
     }
 })
 
