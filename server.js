@@ -50,28 +50,26 @@ app.post('/postform', async(req, res) => {
                              "first_name": name,
                              "custom_fields_values":[
                                 {
-                                   "field_id":314067,
+                                   "field_id": 314067,
                                    "values":[
                                       {
                                          "enum_id":716981,
                                          "value":  phone
                                       }
                                    ]
-                                }
+                                },
+                                {
+                                    "field_id": 462130,
+                                    "values":[
+                                       {
+                                          "value":  city
+                                       }
+                                    ]
+                                 }
                              ]
                           }
                        ],
                     },
-                    "custom_fields_values":[
-                       {
-                          "field_id": 574960,
-                          "values":[
-                             {
-                                "value": city
-                             }
-                          ]
-                       }
-                    ],
                     "pipeline_id": 5559297
                  }
             ],
