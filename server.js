@@ -25,6 +25,7 @@ const token = process.env.AUTHORIZATION_CODE;
 app.post('/postform', async(req, res) => {
     const {name, phone, city} = req.body;
     console.log(name, phone, city);
+    console.log(token)
     if (name || phone || city) {
         const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads',
             {
