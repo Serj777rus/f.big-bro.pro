@@ -46,8 +46,7 @@ app.post('/postform', async(req, res) => {
             },
             {
                 headers: {
-                  'Authorization': `Bearer ${token}`,
-                  'Content-Type': 'application/json'
+                  'Authorization': `Bearer ${token}`
                 }
               }
         )
