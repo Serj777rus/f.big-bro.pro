@@ -46,7 +46,11 @@ app.post('/postform', async(req, res) => {
                     },
                 ]
             },
-            {headers: {'Authorization': `Bearer ${token}`}}
+            {
+                headers: {
+                  'Authorization': `Bearer ${process.env.AUTHORIZATION_CODE}`
+                }
+              }
         )
         if (response.status == 200) {
             res.status(200).send('Заебись')
