@@ -9,7 +9,7 @@ const PORT = 5002;
 const app = express();
 const options = {
     key: fs.readFileSync('/etc/letsencrypt/live/f.big-bro.pro/privkey.pem'),
-    cert: fs.readFileSync('etc/letsencrypt/live/f.big-bro.pro/fullchain.pem')
+    cert: fs.readFileSync('/etc/letsencrypt/live/f.big-bro.pro/fullchain.pem')
   };
 const server = https.createServer(options, app);
 
@@ -24,7 +24,7 @@ app.post('/postform', async(req, res) => {
     const {name, phone, city} = req.body;
     console.log(name, phone, city);
     if (name || phone || city) {
-        const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads', {headers: {'Authorization': `Bearer ${process.env.AUTHORIZATION_CODE}`}},
+        const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads',
             {
                 "name": "Новая сделка BIG BRO",
                 "pipeline_id": 5559297,
@@ -42,7 +42,8 @@ app.post('/postform', async(req, res) => {
                         "value": phone
                     },
                 ]
-            }
+            },
+            {headers: {'Authorization': `Bearer ${process.env.AUTHORIZATION_CODE}`}}
         )
         if (response.status == 200) {
             res.status(200).send('Заебись')
