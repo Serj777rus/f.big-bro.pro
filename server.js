@@ -1,13 +1,17 @@
 require('dotenv').config();
 const express = require('express');
-const http = require('http');
+const https = require('https');
 const cors = require('cors');
 // const axios = require('axios');
 const fs = require('fs')
 
 const PORT = 5002;
 const app = express();
-const server = http.createServer(app);
+const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/f.big-bro.pro/privkey.pem'),
+    cert: fs.readFileSync('etc/letsencrypt/live/f.big-bro.pro/fullchain.pem')
+  };
+const server = https.createServer(options, app);
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
