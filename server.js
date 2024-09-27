@@ -43,34 +43,34 @@ app.post('/postform', async(req, res) => {
                 //         "values": [{ "value": phone }]
                 //     }
                 // ],
-                    "name": name + city,
-                    "_embedded":{
-                       "contacts":[
-                          {
-                             "first_name": name,
-                             "custom_fields_values":[
+                "name": name + ' ' + city,  // Название сделки
+                "pipeline_id": 5559297,  // ID воронки
+                "_embedded": {
+                    "contacts": [
+                        {
+                            "first_name": name,  // Имя контакта
+                            "custom_fields_values": [
                                 {
-                                   "field_id": 314067,
-                                   "values":[
-                                      {
-                                         "enum_id":716981,
-                                         "value":  phone
-                                      }
-                                   ]
+                                    "field_id": 314067,  // Поле для телефона
+                                    "values": [
+                                        {
+                                            "enum_id": 716981,  // Если нужно указать тип телефона
+                                            "value": phone  // Номер телефона
+                                        }
+                                    ]
                                 },
                                 {
-                                    "field_id": 462130,
-                                    "values":[
-                                       {
-                                          "value":  city
-                                       }
+                                    "field_id": 462130,  // Поле для города
+                                    "values": [
+                                        {
+                                            "value": city  // Значение города
+                                        }
                                     ]
-                                 }
-                             ]
-                          }
-                       ],
-                    },
-                    "pipeline_id": 5559297
+                                }
+                            ]
+                        }
+                ]
+            }
                  }
             ],
             {
