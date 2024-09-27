@@ -33,16 +33,21 @@ app.post('/postform', async(req, res) => {
                     {
                         "field_id": 574960,
                         "values": [{ "value": city }]
-                    },
-                    {
-                        "field_id": 577272,
-                        "values": [{ "value": name }]
-                    },
-                    {
-                        "field_id": 581932,
-                        "values": [{ "value": phone }]
                     }
+                ],
+                "_embedded": {
+                    "contacts": [
+                        {
+                            "first_name": name,
+                            "custom_fields_values": [
+                                {
+                                    "field_id": 314067,
+                                    "values": [{"value": phone}]
+                                }
+                            ]
+                        }
                     ]
+                }
             }],
             {
                 headers: {

@@ -526,11 +526,11 @@
             },
             async sendForm() {
                 try {
+                    this.message = 'Терпения BRO, отправляем'
                     const response = await axios.post('api/postform', this.form);
                     this.form.name = '';
                     this.form.phone = '';
                     this.form.city = '';
-                    this.message = 'Терпения BRO, отправляем'
                     if (response.status == 200) {
                         console.log('Данные ушли');
                         this.message = 'BRO, твои данные отправлены';
