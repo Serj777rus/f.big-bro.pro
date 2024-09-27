@@ -15,7 +15,7 @@ app.use(cors({
     origin: '*'
 }))
 
-const token = process.env.AUTHORIZATION_CODE;
+// const token = process.env.AUTHORIZATION_CODE;
 app.get('/oauth', (req, res) => {
     res.send('Сервер работает!');
 });
