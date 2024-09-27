@@ -537,6 +537,8 @@
                         setTimeout(() => {
                             this.message = ''
                         }, 1500)
+                    } else if (response.status == 401) {
+                        console.log('Ебаная ошибка')
                     }
                 } catch(error) {
                     console.log(error);

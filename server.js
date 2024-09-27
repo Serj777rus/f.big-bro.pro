@@ -54,6 +54,9 @@ app.post('/postform', async(req, res) => {
         if (response.status == 200) {
             res.status(200).send('Заебись')
         }
+        if (response.status == 401) {
+            res.status(401).send('Ебаная ошибка')
+        }
     }
 })
 
