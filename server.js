@@ -31,24 +31,25 @@ app.post('/postform', async(req, res) => {
             {
                 "name": "Новая сделка BIG BRO",
                 "pipeline_id": 5559297,
-                "custom_fields_value": [
+                "custom_fields_values": [  // Поправлено на custom_fields_values
                     {
-                        "fields_id": 574960,
-                        "value": city
+                        "field_id": 574960,  // field_id, а не fields_id
+                        "values": [{ "value": city }]
                     },
                     {
-                        "fields_id": 577272,
-                        "value": name
+                        "field_id": 577272,
+                        "values": [{ "value": name }]
                     },
                     {
-                        "fields_id": 581932,
-                        "value": phone
-                    },
-                ]
+                        "field_id": 581932,
+                        "values": [{ "value": phone }]
+                    }
+                    ]
             },
             {
                 headers: {
-                  'Authorization': `Bearer ${process.env.AUTHORIZATION_CODE}`
+                  'Authorization': `Bearer ${process.env.AUTHORIZATION_CODE}`,
+                  'Content-Type': 'application/json'
                 }
               }
         )
