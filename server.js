@@ -15,52 +15,51 @@ app.use(cors({
     origin: '*'
 }))
 
-// const token = process.env.AUTHORIZATION_CODE;
+const token = process.env.AUTHORIZATION_CODE;
 app.get('/oauth', (req, res) => {
     res.send('Сервер работает!');
 });
 
 app.post('/postform', async(req, res) => {
-    res.send('Данныъ нет')
-    // const {name, phone, city} = req.body;
-    // console.log(name, phone, city);
-    // console.log(token)
-    // if (name || phone || city) {
-    //     const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads',
-    //         {
-    //             "name": "Новая сделка BIG BRO",
-    //             "pipeline_id": 5559297,
-    //             "custom_fields_values": [
-    //                 {
-    //                     "field_id": 574960,
-    //                     "values": [{ "value": city }]
-    //                 },
-    //                 {
-    //                     "field_id": 577272,
-    //                     "values": [{ "value": name }]
-    //                 },
-    //                 {
-    //                     "field_id": 581932,
-    //                     "values": [{ "value": phone }]
-    //                 }
-    //                 ]
-    //         },
-    //         {
-    //             headers: {
-    //               'Authorization': `Bearer ${token}`,
-    //               'Content-Type': 'application/json'
-    //             }
-    //           }
-    //     )
-    //     if (response.status == 200) {
-    //         res.status(200).send('Заебись')
-    //     }
-    //     if (response.status == 401) {
-    //         res.status(401).send('Ебаная ошибка')
-    //     }
-    // } else {
-    //     res.send('Данныъ нет')
-    // }
+    const {name, phone, city} = req.body;
+    console.log(name, phone, city);
+    console.log(token)
+    if (name || phone || city) {
+        const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads',
+            {
+                "name": "Новая сделка BIG BRO",
+                "pipeline_id": 5559297,
+                "custom_fields_values": [
+                    {
+                        "field_id": 574960,
+                        "values": [{ "value": city }]
+                    },
+                    {
+                        "field_id": 577272,
+                        "values": [{ "value": name }]
+                    },
+                    {
+                        "field_id": 581932,
+                        "values": [{ "value": phone }]
+                    }
+                    ]
+            },
+            {
+                headers: {
+                  'Authorization': `Bearer ${token}`,
+                  'Content-Type': 'application/json'
+                }
+              }
+        )
+        if (response.status == 200) {
+            res.status(200).send('Заебись')
+        }
+        if (response.status == 401) {
+            res.status(401).send('Ебаная ошибка')
+        }
+    } else {
+        res.send('Данныъ нет')
+    }
 })
 
 
