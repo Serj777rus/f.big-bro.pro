@@ -20,6 +20,8 @@ app.use(cors({
     origin: '*'
 }))
 
+const token = process.env.AUTHORIZATION_CODE;
+
 app.post('/postform', async(req, res) => {
     const {name, phone, city} = req.body;
     console.log(name, phone, city);
@@ -43,7 +45,7 @@ app.post('/postform', async(req, res) => {
                     },
                 ]
             },
-            {headers: {'Authorization': `Bearer ${process.env.AUTHORIZATION_CODE}`}}
+            {headers: {'Authorization': `Bearer ${token}`}}
         )
         if (response.status == 200) {
             res.status(200).send('Заебись')
