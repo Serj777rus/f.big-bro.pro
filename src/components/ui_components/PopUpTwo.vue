@@ -7,7 +7,7 @@
                 <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
                 <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
                 <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
-                <div v-show="message !== ''">{{ message }}</div>
+                <div v-show="message !== ''" style="align-self: center; line-height: 100%; font-size: 24px; color: #DFB700;">{{ message }}</div>
                 <Button :disabled="!form.name || !form.phone || !form.city" type="submit"><slot>Отправить</slot></Button>
             </form>
             <p @click="this.$emit('closePopTime')">&#10006;</p>

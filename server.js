@@ -26,53 +26,25 @@ app.post('/postform', async(req, res) => {
     console.log(token)
     if (name || phone || city) {
         const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads',
-            {
-                // "name": "Новая сделка BIG BRO",
-                // "pipeline_id": 5559297,
-                // "custom_fields_values": [
-                //     {
-                //         "field_id": 574960,
-                //         "values": [{ "value": city }]
-                //     },
-                //     {
-                //         "field_id": 577272,
-                //         "values": [{ "value": name }]
-                //     },
-                //     {
-                //         "field_id": 581932,
-                //         "values": [{ "value": phone }]
-                //     }
-                // ],
-                "name": name + ' ' + city,  // Название сделки
-                "pipeline_id": 5559297,  // ID воронки
-                "_embedded": {
-                    "contacts": [
-                        {
-                            "first_name": name,  // Имя контакта
-                            "custom_fields_values": [
-                                {
-                                    "field_id": 314067,  // Поле для телефона
-                                    "values": [
-                                        {
-                                            "enum_id": 716981,  // Если нужно указать тип телефона
-                                            "value": phone  // Номер телефона
-                                        }
-                                    ]
-                                },
-                                {
-                                    "field_id": 462130,  // Поле для города
-                                    "values": [
-                                        {
-                                            "value": city  // Значение города
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                ]
-            }
+            [{
+                "name": "Новая сделка BIG BRO",
+                "pipeline_id": 5559297,
+                "custom_fields_values": [
+                    {
+                        "field_id": 574960,
+                        "values": [{ "value": city }]
+                    },
+                    {
+                        "field_id": 577272,
+                        "values": [{ "value": name }]
+                    },
+                    {
+                        "field_id": 581932,
+                        "values": [{ "value": phone }]
+                    }
+                ],
                  }
-            ,
+            ],
             {
                 headers: {
                   'Authorization': `Bearer ${token}`

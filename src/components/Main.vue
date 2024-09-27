@@ -46,7 +46,7 @@
                     <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
                     <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
                     <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
-                    <div v-show="message !== ''">{{ message }}</div>
+                    <div v-show="message !== ''" style="align-self: center; line-height: 100%; font-size: 24px; color: #DFB700;">{{ message }}</div>
                     <Button type="submit" :disabled="!form.name || !form.phone || !form.city"><slot>Проверить</slot></Button>
                 </form>
             </div>
@@ -124,7 +124,7 @@
                     <div class="form_big_calc">
                         <div class="form_text_btn">
                             <p>Оставь заявку и получи бизнес план для своего города</p>
-                            <div v-show="message !== ''">{{ message }}</div>
+                            <div v-show="message !== ''" style="align-self: center; line-height: 100%; font-size: 24px; color: #DFB700;">{{ message }}</div>
                             <Button :disabled="!form.name || !form.phone || !form.city" type="submit" form="calc_form"><slot>Получить план</slot></Button>
                         </div>
                         <form id="calc_form" @submit.prevent="sendForm">
@@ -329,7 +329,7 @@
                         <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
                         <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
                         <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
-                        <div v-show="message !== ''">{{ message }}</div>
+                        <div v-show="message !== ''" style="align-self: center; line-height: 100%; font-size: 24px; color: #DFB700;">{{ message }}</div>
                         <Button :disabled="!form.name || !form.phone || !form.city" type="submit"><slot>Отправить</slot></Button>
                     </form>
                 </div>
@@ -460,7 +460,7 @@
                     }
                 ],
                 isShowPop: false,
-                message: '',
+                message: 'Привет',
                 photos: [
                     {
                         id: 1,
@@ -560,7 +560,7 @@
             this.bigCalc.chairs = 1
             setTimeout(() => {
                 this.isShowPopTime = true;
-            }, 5000)
+            }, 60000)
         }
     }
 </script>
