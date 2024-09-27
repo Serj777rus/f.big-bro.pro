@@ -3,14 +3,9 @@ const express = require('express');
 const http = require('http');
 const cors = require('cors');
 const axios = require('axios');
-// const fs = require('fs');
 
 const PORT = 5002;
 const app = express();
-// const options = {
-//     key: fs.readFileSync('/etc/letsencrypt/live/f.big-bro.pro/privkey.pem'),
-//     cert: fs.readFileSync('/etc/letsencrypt/live/f.big-bro.pro/fullchain.pem')
-//   };
 const server = http.createServer(app);
 
 app.use(express.json());
@@ -34,9 +29,9 @@ app.post('/postform', async(req, res) => {
             {
                 "name": "Новая сделка BIG BRO",
                 "pipeline_id": 5559297,
-                "custom_fields_values": [  // Поправлено на custom_fields_values
+                "custom_fields_values": [
                     {
-                        "field_id": 574960,  // field_id, а не fields_id
+                        "field_id": 574960,
                         "values": [{ "value": city }]
                     },
                     {
