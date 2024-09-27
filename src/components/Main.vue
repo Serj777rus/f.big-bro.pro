@@ -526,7 +526,7 @@
             },
             async sendForm() {
                 try {
-                    const response = await axios.post('http://localhost:3000/postform', this.form);
+                    const response = await axios.post('api/postform', this.form);
                     this.form.name = '';
                     this.form.phone = '';
                     this.form.city = '';
