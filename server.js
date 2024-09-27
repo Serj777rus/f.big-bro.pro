@@ -2,8 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const https = require('https');
 const cors = require('cors');
-// const axios = require('axios');
-const fs = require('fs')
+const axios = require('axios');
+const fs = require('fs');
 
 const PORT = 5002;
 const app = express();
@@ -30,23 +30,23 @@ app.use(cors({
 
 // const pipeline = '5559297';
 
-// app.post('/postform', async(req, res) => {
-//     const {name, phone, city} = req.body;
-//     console.log(name, phone, city);
-//     if (name || phone || city) {
-//         const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads', {headers: {'Authorization': `Bearer ${process.env.AUTHORIZATION_CODE}`}},
-//             {
-//                 "name": "Новая сделка BIG BRO",
-//                 "custom_fields_value": [
-//                     {
-//                         "fields_name": ""
-//                     }
-//                 ]
-//             }
-//         )
-//         res.status(200).send('Заебись')
-//     }
-// })
+app.post('/postform', async(req, res) => {
+    const {name, phone, city} = req.body;
+    console.log(name, phone, city);
+    if (name || phone || city) {
+        const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads', {headers: {'Authorization': `Bearer ${process.env.AUTHORIZATION_CODE}`}},
+            {
+                "name": "Новая сделка BIG BRO",
+                "custom_fields_value": [
+                    {
+                        "fields_name": ""
+                    }
+                ]
+            }
+        )
+        res.status(200).send('Заебись')
+    }
+})
 
 
 server.listen(PORT, () => {
