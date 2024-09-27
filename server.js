@@ -26,7 +26,7 @@ app.post('/postform', async(req, res) => {
     console.log(token)
     if (name || phone || city) {
         const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads',
-            {
+            [{
                 "name": "Новая сделка BIG BRO",
                 "pipeline_id": 5559297,
                 "custom_fields_values": [
@@ -43,10 +43,10 @@ app.post('/postform', async(req, res) => {
                         "values": [{ "value": phone }]
                     }
                     ]
-            },
+            }],
             {
                 headers: {
-                  'authorization': `Bearer ${token}`
+                  'Authorization': `Bearer ${token}`
                 }
               }
         )
