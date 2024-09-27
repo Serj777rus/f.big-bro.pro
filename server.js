@@ -27,28 +27,54 @@ app.post('/postform', async(req, res) => {
     if (name || phone || city) {
         const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads',
             [{
-                "name": "Новая сделка BIG BRO",
-                "pipeline_id": 5559297,
-                "custom_fields_values": [
-                    {
-                        "field_id": 574960,
-                        "values": [{ "value": city }]
-                    }
-                ],
-                "_embedded": {
-                    "contacts": [
-                        {
-                            "first_name": name,
-                            "custom_fields_values": [
+                // "name": "Новая сделка BIG BRO",
+                // "pipeline_id": 5559297,
+                // "custom_fields_values": [
+                //     {
+                //         "field_id": 574960,
+                //         "values": [{ "value": city }]
+                //     },
+                //     {
+                //         "field_id": 577272,
+                //         "values": [{ "value": name }]
+                //     },
+                //     {
+                //         "field_id": 581932,
+                //         "values": [{ "value": phone }]
+                //     }
+                // ],
+                    "name": name + city,
+                    "_embedded":{
+                       "contacts":[
+                          {
+                             "first_name": name,
+                             "custom_fields_values":[
                                 {
-                                    "field_id": 314067,
-                                    "values": [{"value": phone}]
+                                   "field_id":314067,
+                                   "values":[
+                                      {
+                                         "enum_id":716981,
+                                         "value":  phone
+                                      }
+                                   ]
                                 }
-                            ]
-                        }
-                    ]
-                }
-            }],
+                             ]
+                          }
+                       ],
+                    },
+                    "custom_fields_values":[
+                       {
+                          "field_id": 574960,
+                          "values":[
+                             {
+                                "value": city
+                             }
+                          ]
+                       }
+                    ],
+                    "pipeline_id":3383152
+                 }
+            ],
             {
                 headers: {
                   'Authorization': `Bearer ${token}`
