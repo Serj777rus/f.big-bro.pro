@@ -79,6 +79,7 @@
         color: #DFB700;
         cursor: pointer;
         font-size: 24px;
+        z-index: 1000;
     }
     .popup_main form {
         display: flex;
