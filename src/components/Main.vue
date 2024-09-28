@@ -2013,6 +2013,7 @@
     align-items: center;
     padding: 40px 0px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 .gift_main {
     width: 1200px;

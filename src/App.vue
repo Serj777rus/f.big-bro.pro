@@ -15,6 +15,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap');
 body {
   margin: 0;
+  padding: 0;
 }
 #app {
   font-family: "Geologica", sans-serif;

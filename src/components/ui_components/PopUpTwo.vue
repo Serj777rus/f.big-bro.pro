@@ -56,7 +56,7 @@
 <style scoped>
     .popup {
         width: 100%;
-        height: 100vh;
+        height: 100svh;
         position: fixed;
         top: 0;
         left: 0;
@@ -64,6 +64,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 999;
     }
     .popup_main {
         width: 600px;
@@ -82,8 +83,9 @@
     .popup_main form {
         display: flex;
         width: 100%;
+        height: 100%;
         flex-direction: column;
-        gap: 32px;
+        gap: 24px;
         box-sizing: border-box;
         padding: 32px;
         background-color: #fff;
@@ -109,6 +111,7 @@
     @media all and (max-width: 440px) {
         .popup_main {
         width: 100%;
+        height: 100vh;
         display: block;
         position: relative;
     }
@@ -125,7 +128,7 @@
         display: flex;
         width: 100%;
         flex-direction: column;
-        gap: 32px;
+        gap: 16px;
         box-sizing: border-box;
         padding: 32px;
         background-color: #fff;
