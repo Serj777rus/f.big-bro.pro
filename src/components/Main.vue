@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <div class="hero_div">
-        <video src="../assets/video.mp4" autoplay muted loop></video>
+        <video src="../assets/video.mp4" autoplay muted loop playsinline webkit-playinginline></video>
         <div class="hero_main_div">
             <div class="header">
                 <img src="../assets/logo-big-bro-black-white.png">
