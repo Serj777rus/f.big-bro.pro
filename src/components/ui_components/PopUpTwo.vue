@@ -111,7 +111,7 @@
     @media all and (max-width: 440px) {
         .popup_main {
         width: 100%;
-        height: 100vh;
+        height: auto;
         display: block;
         position: relative;
     }
