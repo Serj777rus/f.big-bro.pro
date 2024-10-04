@@ -44,7 +44,7 @@
                 <p>Узнай, свободен ли твой город?</p>
                 <form @submit.prevent="sendForm">
                     <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
-                    <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
+                    <MaskInput v-model="form.phone" mask="# (###) ### ## ##" type="text" name="phone" id="phone" placeholder="Телефон" />
                     <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
                     <div v-show="message !== ''" style="align-self: center; line-height: 100%; font-size: 24px; color: #DFB700;">{{ message }}</div>
                     <Button type="submit" :disabled="!form.name || !form.phone || !form.city" @click="trackGoal"><slot>Проверить</slot></Button>
@@ -129,7 +129,7 @@
                         </div>
                         <form id="calc_form" @submit.prevent="sendForm">
                             <input v-model="form.name" type="text" name="name" placeholder="Имя">
-                            <input v-model="form.phone" type="text" name="phone" placeholder="Телефон">
+                            <MaskInput mask="# (###) ### ## ##" v-model="form.phone" type="text" name="phone" placeholder="Телефон" />
                             <input v-model="form.city" type="text" name="city" placeholder="Город">
                         </form>
                     </div>
@@ -327,7 +327,7 @@
                 <div class="footer_left_side">
                     <form @submit.prevent="sendForm">
                         <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
-                        <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
+                        <MaskInput v-model="form.phone" mask="# (###) ### ## ##" type="text" name="phone" id="phone" placeholder="Телефон" />
                         <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
                         <div v-show="message !== ''" style="align-self: center; line-height: 100%; font-size: 24px; color: #DFB700;">{{ message }}</div>
                         <Button :disabled="!form.name || !form.phone || !form.city" type="submit" @click="trackGoal"><slot>Отправить</slot></Button>
@@ -342,6 +342,20 @@
     </div>
     <PopUp @sendPopForm="fetchingPopUpData" :isOpen="isShowPop" @closePop="closePopUp"></PopUp>
     <PopUpTwo :isOpenTime="isShowPopTime" @closePopTime="closePopTime" @sendPopForm="fetchingPopUpData"></PopUpTwo>
+    <div class="thankPop" v-show="thankPop">
+        <div class="thankPop_main">
+            <div class="text_thankPop">
+                <p>СПАСИБО, BRO!</p>
+                <span>Твои данные отправлены и в ближайшее время мы с тобой свяжемся</span>
+                <h4>А пока подпишись на наши соц сети</h4>
+            </div>
+            <div class="socials_thanksPop">
+                <img src="../assets/vk_pop.png">
+                <img src="../assets/tg_pop.png">
+            </div>
+            <p @click="thankPop = false" class="close_thank_pop">&#10006;</p>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -349,11 +363,13 @@
     import Button from './ui_components/Button.vue';
     import PopUp from './ui_components/PopUp.vue';
     import PopUpTwo from './ui_components/PopUpTwo.vue';
+    import { MaskInput } from 'vue-3-mask';
     export default {
         components: {
             Button,
             PopUp,
-            PopUpTwo
+            PopUpTwo,
+            MaskInput
         },
         data() {
             return {
@@ -476,7 +492,8 @@
                     }
                 ],
                 activephoto: 2,
-                isShowPopTime: false
+                isShowPopTime: false,
+                thankPop: true
             }
         },
         watch: {
@@ -533,10 +550,11 @@
                     this.form.city = '';
                     if (response.status == 200) {
                         console.log('Данные ушли');
-                        this.message = 'BRO, твои данные отправлены';
-                        setTimeout(() => {
-                            this.message = ''
-                        }, 1500)
+                        // this.message = 'BRO, твои данные отправлены';
+                        this.thankPop = true
+                        // setTimeout(() => {
+                        //     this.message = ''
+                        // }, 3000)
                     } else if (response.status == 401) {
                         console.log('Ебаная ошибка')
                     }
@@ -2509,6 +2527,80 @@
     }
     .logo_polici p {
         font-size: 12px;
+    }
+}
+.thankPop {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, .8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1002;
+    box-sizing: border-box;
+}
+.thankPop_main {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    background: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    padding: 24px;
+    position: relative;
+}
+.text_thankPop {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.text_thankPop p {
+    font-size: 32px;
+    font-weight: 900;
+}
+.text_thankPop span {
+    font-size: 16px;
+    font-weight: 300;
+    color: #DFB700;
+}
+.text_thankPop h4 {
+    font-size: 24px;
+    font-weight: 100;
+}
+.socials_thanksPop {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.socials_thanksPop img {
+    width: 120px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+.socials_thanksPop img:hover {
+    transform: scale(1.2);
+}
+.close_thank_pop {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #DFB700;
+    font-size: 24px;
+    cursor: pointer;
+}
+@media all and (max-width: 440px) {
+    .thankPop {
+        padding: 0px 10px;
+    }
+    .thankPop_main {
+        width: 100%;
     }
 }
 </style>

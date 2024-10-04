@@ -5,7 +5,7 @@
                 <img src="@/assets/logo-big-bro-black-white.png">
                 <h5>Оставьте Ваши контакты и мы свяжемся с Вами в ближайшее время</h5>
                 <input v-model="form.name" type="text" name="name" id="name" placeholder="Имя">
-                <input v-model="form.phone" type="text" name="phone" id="phone" placeholder="Телефон">
+                <MaskInput v-model="form.phone" mask="# (###) ### ## ##" type="text" name="phone" id="phone" placeholder="Телефон" />
                 <input v-model="form.city" type="text" name="city" id="city" placeholder="Город">
                 <div v-show="message !== ''" style="align-self: center; line-height: 100%; font-size: 24px; color: #DFB700;">{{ message }}</div>
                 <Button :disabled="!form.name || !form.phone || !form.city" type="submit" @click="trackGoal"><slot>Отправить</slot></Button>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+    import { MaskInput } from 'vue-3-mask';
     import Button from './Button.vue';
     export default {
         props: {
@@ -25,7 +26,8 @@
             }
         },
         components: {
-            Button
+            Button,
+            MaskInput
         },
         data() {
             return {
@@ -39,6 +41,7 @@
         methods: {
             sendForm() {
                 this.$emit('sendPopForm', this.form)
+                this.props.isOpen = false
             },
             trackGoal() {
                 if (window.ym) {
@@ -64,6 +67,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 1001;
     }
     .popup_main {
         width: 600px;
