@@ -573,6 +573,8 @@
                 this.form = data;
                 console.log(this.form)
                 this.sendForm();
+                this.closePopTime();
+                this.closePopUp();
             },
             trackGoal() {
                 if (window.ym) {
