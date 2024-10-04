@@ -350,8 +350,8 @@
                 <h4>А пока подпишись на наши соц сети</h4>
             </div>
             <div class="socials_thanksPop">
-                <img src="../assets/vk_pop.png">
-                <img src="../assets/tg_pop.png">
+                <a href="https://vk.com/blogbigbro" target="_blank"><img src="../assets/vk_pop.png"></a>
+                <a href="https://t.me/bigbrobarbershopfranshiza" target="_blank"><img src="../assets/tg_pop.png"></a>
             </div>
             <p @click="thankPop = false" class="close_thank_pop">&#10006;</p>
         </div>
