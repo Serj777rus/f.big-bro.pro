@@ -493,7 +493,7 @@
                 ],
                 activephoto: 2,
                 isShowPopTime: false,
-                thankPop: true
+                thankPop: false
             }
         },
         watch: {
@@ -543,7 +543,7 @@
             },
             async sendForm() {
                 try {
-                    this.message = 'Терпения BRO, отправляем'
+                    // this.message = 'Терпения BRO, отправляем'
                     const response = await axios.post('api/postform', this.form);
                     this.form.name = '';
                     this.form.phone = '';
@@ -557,6 +557,10 @@
                         // }, 3000)
                     } else if (response.status == 401) {
                         console.log('Ебаная ошибка')
+                        this.message = 'Возникла ошибка, попробуйте еще раз'
+                        setTimeout(() => {
+                            this.message = ''
+                        }, 3000)
                     }
                 } catch(error) {
                     console.log(error);
