@@ -65,7 +65,8 @@ app.post('/postform', async(req, res) => {
                                     "values": [
                                         {
                                             "value": phone,
-                                            "enum_id": 716981
+                                            "enum_id": 716981,
+                                            "enum_code": "MOB"
                                         }
                                     ]
                                 }
