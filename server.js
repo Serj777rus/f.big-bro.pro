@@ -58,7 +58,6 @@ app.post('/postform', async(req, res) => {
                 "_embedded": {
                     "contacts": [
                         {
-                            "name": name,
                             "first_name": name,
                             "custom_fields_values": [
                                 {
