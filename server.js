@@ -51,7 +51,7 @@ app.post('/postform', async(req, res) => {
         //         }
         //       }
         // )
-        const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads',
+        const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads/complex',
             [{
                 "name": "Новая сделка BIG BRO",
                 "pipeline_id": 5559297,
