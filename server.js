@@ -25,25 +25,62 @@ app.post('/postform', async(req, res) => {
     console.log(name, phone, city);
     console.log(token)
     if (name || phone || city) {
+        // const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads',
+        //     [{
+        //         "name": "Новая сделка BIG BRO",
+        //         "pipeline_id": 5559297,
+        //         "custom_fields_values": [
+        //             {
+        //                 "field_id": 574960,
+        //                 "values": [{ "value": city }]
+        //             },
+        //             {
+        //                 "field_id": 577272,
+        //                 "values": [{ "value": name }]
+        //             },
+        //             {
+        //                 "field_id": 581932,
+        //                 "values": [{ "value": phone }]
+        //             }
+        //         ],
+        //     }
+        //     ],
+        //     {
+        //         headers: {
+        //           'Authorization': `Bearer ${token}`
+        //         }
+        //       }
+        // )
         const response = await axios.post('https://zifa.amocrm.ru/api/v4/leads',
             [{
                 "name": "Новая сделка BIG BRO",
                 "pipeline_id": 5559297,
+                "_embedded": {
+                    "contacts": [
+                        {
+                            "name": name,
+                            "first_name": name,
+                            "custom_fields_values": [
+                                {
+                                    "field_id": 314067,
+                                    "values": [
+                                        {
+                                            "value": phone,
+                                            "enum_id": 716981
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
                 "custom_fields_values": [
                     {
                         "field_id": 574960,
                         "values": [{ "value": city }]
-                    },
-                    {
-                        "field_id": 577272,
-                        "values": [{ "value": name }]
-                    },
-                    {
-                        "field_id": 581932,
-                        "values": [{ "value": phone }]
                     }
                 ],
-                 }
+            }
             ],
             {
                 headers: {
