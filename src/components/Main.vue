@@ -60,12 +60,12 @@
             <div class="calc">
                 <div class="tabs">
                     <div class="tab">
-                        <p :class="{active: calc.money == 1}" @click="calc.money = 1">Выручка</p>
-                        <p :class="{active: calc.money == 0.3}" @click="calc.money = 0.3">Прибыль</p>
+                        <p :class="{active: calc.money === 1}" @click="calc.money = 1">Выручка</p>
+                        <p :class="{active: calc.money === 0.3}" @click="calc.money = 0.3">Прибыль</p>
                     </div>
                     <div class="tab">
-                        <p :class="{active: calc.period == 1}" @click="calc.period = 1">Месяц</p>
-                        <p :class="{active: calc.period == 12}" @click="calc.period = 12">Год</p>
+                        <p :class="{active: calc.period === 1}" @click="calc.period = 1">Месяц</p>
+                        <p :class="{active: calc.period === 12}" @click="calc.period = 12">Год</p>
                     </div>
                 </div>
                 <div class="calc_value">
@@ -178,7 +178,7 @@
         <div class="photos_main">
             <p>Как будет выглядеть ваш BIG BRO</p>
             <div class="another_photo">
-                <img class="big_photo" v-for="photo in photos" :key="photo.id" :src="photo.image" :class="{activeimage: activephoto == photo.id}">
+                <img class="big_photo" v-for="photo in photos" :key="photo.id" :src="photo.image" :class="{activeimage: activephoto === photo.id}">
                 <div class="all_photos">
                     <img class="thumb_photo" v-for="photo in photos" :key="photo.id" :src="photo.image" @click="changePhoto(photo.id)">
                 </div>
@@ -548,14 +548,14 @@
                     this.form.name = '';
                     this.form.phone = '';
                     this.form.city = '';
-                    if (response.status == 200) {
+                    if (response.status === 200) {
                         console.log('Данные ушли');
                         // this.message = 'BRO, твои данные отправлены';
                         this.thankPop = true
                         // setTimeout(() => {
                         //     this.message = ''
                         // }, 3000)
-                    } else if (response.status == 401) {
+                    } else if (response.status === 401) {
                         console.log('Ебаная ошибка')
                         this.message = 'Возникла ошибка, попробуйте еще раз'
                         setTimeout(() => {
@@ -1347,7 +1347,6 @@
     box-sizing: border-box;
     width: calc(100% / 3 - 12px);
     height: 660px;
-    box-sizing: border-box;
     padding: 24px;
     border-radius: 32px;
     color: #fff;
@@ -1648,7 +1647,6 @@
     border-radius: 24px;
     background: rgba(255, 255, 255, .3);
     backdrop-filter: blur(2px);
-    box-sizing: border-box;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     scroll-padding: 16px;
@@ -1672,7 +1670,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 16;
+    gap: 16px;
 }
 .big_photo {
     width: 100%;
@@ -1705,7 +1703,6 @@
     border-radius: 12px;
     background: rgba(255, 255, 255, .3);
     backdrop-filter: blur(2px);
-    box-sizing: border-box;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     scroll-padding: 16px;
@@ -1882,7 +1879,7 @@
     justify-content: space-between;
     padding: 64px 24px;
     background: url(../assets/Vector1.svg);
-    filter: drop-shadow(0px 8px 20px 0 rgba(0,0,0, .25));
+    filter: drop-shadow(0px 8px 20px 0px rgba(0,0,0, .25));
     -webkit-filter: drop-shadow(0px 8px 20px 0 rgba(0,0,0, .25));
     background-repeat: no-repeat;
     background-position: center;
@@ -2075,7 +2072,7 @@
     color: red;
 }
 .right_side_gift {
-    width: calc(50% -16px);
+    width: calc(50% - 16px);
     height: 580px;
     position: relative;
 }
